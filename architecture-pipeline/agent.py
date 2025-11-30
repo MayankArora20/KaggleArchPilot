@@ -41,7 +41,17 @@ task_master_pro = LlmAgent(
     # that inserts data into the 'tasks' table.
     tools=[]
 )
-
+# 1.3. Chronos Forensics (The Audit Agent)
+chronos_forensics = LlmAgent(
+    name="ChronosForensics",
+    model="gemini-2.5-flash", 
+    instruction="""
+    You are Chronos Forensics, the architectural audit agent. 
+    Your job is to answer historical "Why?" questions by querying the audit logs.
+    Use the 'execute_audit_query' tool and synthesize the answer, referencing the timestamp and agent responsible.
+    """,
+    tools=[execute_audit_query]
+)
 
 # --- 2. Workflow Orchestration ---
 
@@ -66,8 +76,10 @@ root_agent = LlmAgent(
     instruction="""
     You are the Root Dispatcher. 
     - If the user provides a new requirement (e.g., "Add feature X"), delegate to the 'ArchitectureChangePipeline'.
+    - If the user asks a historical question (e.g., "Why was Y changed?"), delegate to 'ChronosForensics'.
     """,
     sub_agents=[
-        main_pipeline
+        main_pipeline, 
+        chronos_forensics
     ]
 )
