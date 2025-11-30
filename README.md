@@ -2,6 +2,9 @@ The ArchPilot System
 
 This project is developed as part of Agents Intensive - Capstone Project competition
 
+Note: Project python code is present inside architecture-pipeline directory 
+
+
 I. The Problem & Central Idea
 
 Enterprise systems frequently suffer from Architecture Drift, where high-level documentation (HLL docs/diagrams) falls out of sync with constantly changing code requirements. This leads to development tasks (Jira/tasks) not being rooted in the latest architecture, resulting in tactical patches instead of foundational, root fixes.
