@@ -76,8 +76,10 @@ root_agent = LlmAgent(
     instruction="""
     You are the Root Dispatcher. 
     - If the user provides a new requirement (e.g., "Add feature X"), delegate to the 'ArchitectureChangePipeline'.
+    - If the user asks a historical question (e.g., "Why was Y changed?"), delegate to 'ChronosForensics'.
     """,
     sub_agents=[
-        main_pipeline
+        main_pipeline, 
+        chronos_forensics
     ]
 )
